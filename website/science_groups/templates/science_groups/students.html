@@ -1,0 +1,55 @@
+{% extends 'science_groups/base.html' %}
+
+{% block title %}
+Студенты
+{% endblock %}
+
+{% block content %}
+<p class = 'title'>
+    Список студентов:
+</p>
+
+<table class = 'main-table'>
+    <tr>
+        <th>
+            Номер ИСУ
+        </th>
+        <th>
+            ФИО
+        </th>
+        <th>
+            Изменить
+        </th>
+        <th>
+            Удалить
+        </th>
+    </tr>
+    {% for student in students %}
+        <tr>
+            <td>
+                {{ student.student_id }}
+            </td>
+            <td>
+                <a href = "{% url 'student_details' student.student_id %}">
+                    {{ student.last_name|add:" "|add:student.first_name|add:" "|add:student.middle_name }}
+                </a>
+            </td>
+            <td>
+                <a class = 'button button-edit' href = "{% url 'student-edit' student.student_id %}">
+                    Изменить
+                </a>
+            </td>
+            <td>
+                <a class = 'button button-delete' href = "{% url 'student-delete' student.student_id %}">
+                    Удалить
+                </a>
+            </td>
+        </tr>
+    {% endfor %}
+</table>
+<div class = 'button-wrapper'>
+  <a class = 'button-add' href = "{% url 'student-add' %}">
+    Добавить
+  </a>
+</div>
+{% endblock %}

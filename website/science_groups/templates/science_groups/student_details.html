@@ -1,0 +1,63 @@
+{% extends 'science_groups/base.html' %}
+
+{% block title %}
+  Студент №{{ student.student_id }}
+{% endblock %}
+
+{% block content %}
+<p class = 'title'>
+  Просмотр информации о студенте №{{ student.student_id }}
+</p>
+
+<div class = 'info'>
+  <p>
+    Имя: {{ student.first_name }}
+  </p>
+  <p>
+    Фамилия: {{ student.last_name }}
+  </p>
+  <p>
+    Отчество: {{ student.middle_name }}
+  </p>
+</div>
+
+{% if groups %}
+<p class = 'groups-info'>
+  Состоит в следующих научных группах
+</p>
+<table class = 'groups-table'>
+<tr>
+<td>
+Номер группы
+</td>
+<td>
+Руководитель
+</td>
+<td>
+Назначение группы
+</td>
+</tr>
+{% for group in groups %}
+<tr>
+<td>
+<a href = "{% url 'group_details' group.group_id %}">
+{{ group.group_id }}
+</a>
+</td>
+<td>
+<a href = "{% url 'teacher_details' group.teacher.teacher_id %}">
+{{ group.teacher }}
+</a>
+</td>
+<td>
+{{ group.group_purpose }}
+</td>
+</tr>
+{% endfor %}
+</table>
+{% else %}
+<p class = 'groups-info'>
+  Данный студент не состоит в научных группах
+</p>
+{% endif %}
+{% endblock %}

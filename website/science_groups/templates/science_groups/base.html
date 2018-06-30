@@ -1,0 +1,53 @@
+<!doctype html>
+
+<html>
+
+    <head>
+        <meta charset = 'utf-8'>
+        <title>
+            {% block title %}
+                Главная страница
+            {% endblock %}
+        </title>
+        {% load staticfiles %}
+        <link rel = 'stylesheet' href = "{% static 'science_groups/styles.css' %}" />
+        <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    </head>
+
+    <body>
+
+        <header>
+            <nav>
+                <ul>
+                    <li>
+                        <a href = "{% url 'index' %}">
+                          Главная страница
+                        </a>
+                    </li>
+                    <li>
+                      <a href = "{% url 'students' %}">
+                        Студенты
+                      </a>
+                    </li>
+                    <li>
+                      <a href = "{% url 'teachers' %}">
+                        Преподаватели
+                      </a>
+                    </li>
+                    <li>
+                      <a href = "{% url 'groups' %}">
+                        Научные группы
+                      </a>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+
+        <main>
+            {% block content %}
+            {% endblock %}
+        </main>
+
+    </body>
+
+</html>

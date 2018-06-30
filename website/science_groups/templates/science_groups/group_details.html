@@ -1,0 +1,52 @@
+{% extends 'science_groups/base.html' %}
+
+{% block title %}
+  Научная группа №{{ group.group_id }}
+{% endblock %}
+
+{% block content %}
+<p class = 'title'>
+  Просмотр информации о группе №{{ group.group_id }}
+</p>
+
+<div class = 'info'>
+  <p>
+  Руководитель: {{ group.teacher }}
+  </p>
+  <p>
+  Назначение: {{ group.group_purpose }}
+  </p>
+</div>
+
+{% if students %}
+  <p class = 'title'>
+    Список студентов, входящих в научную группу
+  </p>
+  <table class = 'groups-table' border = '1px'>
+    <tr>
+      <th>
+        Номер ИСУ
+      </th>
+      <th>
+        ФИО
+      </th>
+    </tr>
+    {% for student in students %}
+      <tr>
+        <td>
+          {{ student.student_id }}
+        </td>
+        <td>
+          <a href = "{% url 'student_details' student.student_id %}">
+            {{ student.last_name|add:" "|add:student.first_name|add:" "|add:student.middle_name }}
+          </a>
+        </td>
+      </tr>
+    {% endfor %}
+  </table>
+{% else %}
+  <p class = 'title'>
+    В данной научной группе не состоит ни одного студента
+  </p>
+{% endif %}
+{% endblock %}

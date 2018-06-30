@@ -1,0 +1,63 @@
+{% extends 'science_groups/base.html' %}
+
+{% block title %}
+  Научные группы
+{% endblock %}
+
+{% block content %}
+<p class = 'title'>
+  Научные группы
+</p>
+
+<table class = 'groups-table'>
+  <tr>
+    <th>
+      Номер группы
+    </th>
+    <th>
+      Руководитель
+    </th>
+    <th>
+      Назначение группы
+    </th>
+    <th>
+      Изменить
+    </th>
+    <th>
+      Удалить
+    </th>
+  </tr>
+    {% for group in groups %}
+      <tr>
+        <td>
+          <a href = "{% url 'group_details' group.group_id %}">
+            {{ group.group_id }}
+          </a>
+        </td>
+        <td>
+          <a href = "{% url 'teacher_details' group.teacher.teacher_id %}">
+            {{ group.teacher }}
+          </a>
+        </td>
+        <td>
+          {{ group.group_purpose }}
+        </td>
+        <td>
+          <a class = 'button button-edit' href = "{% url 'group-edit' group.group_id %}">
+            Изменить
+          </a>
+        </td>
+        <td>
+          <a class = 'button button-delete' href = "{% url 'group-delete' group.group_id %}">
+            Удалить
+          </a>
+        </td>
+      </tr>
+    {% endfor %}
+</table>
+<div class = 'button-wrapper'>
+  <a class = 'button-add' href = "{% url 'group-create' %}">
+    Добавить
+  </a>
+</div>
+{% endblock %}

@@ -1,0 +1,55 @@
+{% extends 'science_groups/base.html' %}
+
+{% block title %}
+  Преподаватель №{{ teacher.teacher_id }}
+{% endblock %}
+
+{% block content %}
+<p class = 'title'>
+  Просмотр информации о преподавателе №{{ teacher.teacher_id }}
+</p>
+
+<div class = 'info'>
+  <p>
+    Имя: {{ teacher.first_name }}
+  </p>
+  <p>
+    Фамилия: {{ teacher.last_name }}
+  </p>
+  <p>
+    Отчество: {{ teacher.middle_name }}
+  </p>
+</div>
+
+{% if groups %}
+  <p class = 'groups-info'>
+    Данный преподаватель является руководителем следующих научных групп
+  </p>
+  <table class = 'groups-table' border = '1px'>
+    <tr>
+      <th>
+        Номер группы
+      </th>
+      <th>
+        Назначение группы
+      </th>
+    </tr>
+    {% for group in groups %}
+      <tr>
+        <td>
+          <a href = "{% url 'group_details' group.group_id %}">
+            {{ group.group_id }}
+          </a>
+        </td>
+        <td>
+          {{ group.group_purpose }}
+        </td>
+      </tr>
+    {% endfor %}
+  </table>
+  {% else %}
+  <p class = 'groups-info'>
+    Данный преподаватель не имеет научных групп
+  </p>
+{% endif %}
+{% endblock %}

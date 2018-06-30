@@ -1,0 +1,53 @@
+{% extends 'science_groups/base.html' %}
+
+{% block title %}
+  Преподаватели
+{% endblock %}
+
+{% block content %}
+<p class = 'title'>Список преподавателей:</p>
+
+<table class = 'main-table'>
+  <tr>
+    <th>
+      Номер ИСУ
+    </th>
+    <th>
+      ФИО
+    </th>
+    <th>
+      Изменить
+    </th>
+    <th>
+      Удалить
+    </th>
+  </tr>
+  {% for teacher in teachers %}
+    <tr>
+      <td>
+        {{ teacher.teacher_id }}
+      </td>
+      <td>
+        <a href = "{% url 'teacher_details' teacher.teacher_id %}">
+          {{ teacher.last_name|add:" "|add:teacher.first_name|add:" "|add:teacher.middle_name }}
+        </a>
+      </td>
+      <td>
+        <a class = 'button button-edit' href = "{% url 'teacher-edit' teacher.teacher_id %}">
+          Изменить
+        </a>
+      </td>
+      <td>
+        <a class = 'button button-delete' href = "{% url 'teacher-delete' teacher.teacher_id %}">
+          Удалить
+        </a>
+      </td>
+    </tr>
+  {% endfor %}
+</table>
+<div class = 'button-wrapper'>
+  <a class = 'button-add' href = "{% url 'teacher-add' %}">
+    Добавить
+  </a>
+</div>
+{% endblock %}

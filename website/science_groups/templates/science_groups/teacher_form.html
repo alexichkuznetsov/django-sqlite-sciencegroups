@@ -1,0 +1,31 @@
+{% extends 'science_groups/base.html' %}
+
+{% block title %}
+  Преподаватель
+{% endblock %}
+
+{% block content %}
+<div class = 'form-wrapper'>
+  <form class = 'student-teacher-form' method = 'post'>
+      {% csrf_token %}
+
+      {{ form.as_p }}
+
+      {% with url_name=request.resolver_match.url_name %}
+          {% if url_name == 'teacher-add' %}
+              <button type = 'submit'>
+                  Добавить
+              </button>
+          {% elif url_name == 'teacher-delete' %}
+              <button type = 'submit'>
+                  Удалить
+              </button>
+          {% else %}
+              <button type = 'submit'>
+                  Изменить
+              </button>
+          {% endif %}
+      {% endwith %}
+  </form>
+</div>
+{% endblock %}

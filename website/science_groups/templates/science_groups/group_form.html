@@ -1,0 +1,28 @@
+{% extends 'science_groups/base.html' %}
+
+{% block title %}
+  Научная группа
+{% endblock %}
+
+{% block content %}
+<div class = 'form-wrapper'>
+<form class = 'group-form' method = 'post'>
+
+    {% csrf_token %}
+    {{ form.as_p }}
+
+    {% with url_name=request.resolver_match.url_name %}
+
+        {% if url_name == 'group-create' %}
+        <button type = 'submit'>Добавить</button>
+        {% elif url_name == 'group-edit' %}
+        <button type = 'submit'>Изменить</button>
+        {% elif url_name == 'group-delete' %}
+        <button type = 'submit'>Удалить</button>
+        {% endif %}
+
+    {% endwith %}
+
+</form>
+</div>
+{% endblock %}
